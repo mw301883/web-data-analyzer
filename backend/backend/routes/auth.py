@@ -1,13 +1,13 @@
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import (
-    create_access_token, jwt_required, get_jwt_identity
-)
 from passlib.hash import bcrypt
-
+from flask_jwt_extended import (
+    create_access_token
+)
 from backend.db import get_users_collection
 
 auth_bp = Blueprint('auth', __name__)
 
+# TODO optionally add register panel
 @auth_bp.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
@@ -36,9 +36,3 @@ def login():
 
     access_token = create_access_token(identity=username)
     return jsonify({'access_token': access_token})
-
-@auth_bp.route('/dashboard', methods=['GET'])
-@jwt_required()
-def protected():
-    current_user = get_jwt_identity()
-    return jsonify({'message': f'Hello, {current_user}! This is a protected route.'})

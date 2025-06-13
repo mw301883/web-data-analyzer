@@ -12,6 +12,7 @@ def init_db():
     client = MongoClient(mongo_uri)
     db = client.get_database()
     _users = db.users
+
 def get_users_collection():
     global _users
     if _users is None:
