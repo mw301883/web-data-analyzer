@@ -49,7 +49,12 @@ def get_all_titles():
         filtered = filtered[filtered['type'] == title_type]
 
     if country_filter:
-        filtered = filtered[filtered['country'].str.contains(country_filter, case=False, na=False)]
+        filtered = filtered[
+            filtered['country'].apply(
+                lambda x: country_filter.lower() in [c.strip().lower() for c in x.split(',')]
+            )
+    ]
+
 
     if year_filter:
         filtered = filtered[filtered['release_year'] == year_filter]

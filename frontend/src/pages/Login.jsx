@@ -5,27 +5,29 @@ import { login } from '../auth';
 export default function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      try {
-        await login(username, password);
-        onLogin();
-        navigate('/dashboard');
-      } catch (error) {
-        alert(error.message || 'Nie udało się zalogować');
-      }
-    };
+    e.preventDefault();
+    setError('');
+    try {
+      await login(username, password);
+      onLogin();
+      navigate('/dashboard');
+    } catch (error) {
+      setError(error.message || 'Nie udało się zalogować');
+    }
+  };
 
   return (
-    <div
-      className="d-flex justify-content-center align-items-center vh-100"
-      style={{ backgroundColor: '#e9ecef' }}
-    >
+    <div className="d-flex justify-content-center align-items-center min-vh-100 bg-light">
       <div className="card shadow-lg p-4" style={{ maxWidth: '400px', width: '100%' }}>
-        <h3 className="card-title mb-4 text-center">Witaj w Data Analyzer!</h3>
+        <h3 className="card-title mb-4 text-center text-primary">Witaj w Data Analyzer!</h3>
         <form onSubmit={handleSubmit}>
+          {error && (
+            <div className="alert alert-danger py-2">{error}</div>
+          )}
           <div className="mb-3">
             <label htmlFor="username" className="form-label fw-semibold">
               Nazwa użytkownika

@@ -1,1 +1,41 @@
+# dependencies
+node_modules/
+.pnpm/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# production
+dist/
+build/
+
+# misc
+.DS_Store
 .env
+.env.local
+.env.*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.vscode/
+.idea/
+*.swp
+
+# logs
+logs
+*.log
+
+# jest
+coverage/
+
+# local dev
+*.local
+
+# OS
+Thumbs.db
+
+# Vite
+*.vite
+
+# Mac system files
+.DS_Store
