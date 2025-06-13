@@ -7,6 +7,10 @@ import os
 from backend.routes.auth import auth_bp
 from backend.routes.api import api_bp
 from backend.db import init_db, ensure_admin_user
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
 
 load_dotenv(dotenv_path="../.env")
 
