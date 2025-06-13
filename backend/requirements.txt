@@ -4,3 +4,4 @@ flask-cors
 Flask-JWT-Extended
 passlib
 python-dotenv
+pandas

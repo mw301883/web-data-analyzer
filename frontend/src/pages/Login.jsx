@@ -2,20 +2,21 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../auth';
 
-export default function Login() {
+export default function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await login(username, password);
-      navigate('/dashboard');
-    } catch (error) {
-      alert(error.message || 'Nie udało się zalogować');
-    }
-  };
+      e.preventDefault();
+      try {
+        await login(username, password);
+        onLogin();
+        navigate('/dashboard');
+      } catch (error) {
+        alert(error.message || 'Nie udało się zalogować');
+      }
+    };
 
   return (
     <div

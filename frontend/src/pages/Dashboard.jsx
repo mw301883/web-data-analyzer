@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import API from '../api';
 import { logout } from '../auth';
 
-export default function Dashboard() {
+export default function Dashboard({ onLogout }) {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    API.get('/dashboard')
+    API.get('/netflix/titles')
       .then((res) => setMessage(res.data.message))
       .catch((err) => {
         console.error('Błąd pobierania danych z dashboard:', err);
@@ -19,7 +19,7 @@ export default function Dashboard() {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    onLogout();
   };
 
   return (

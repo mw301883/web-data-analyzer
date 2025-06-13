@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 
 from backend.routes.auth import auth_bp
+from backend.routes.api import api_bp
 from backend.db import init_db, ensure_admin_user
 
 load_dotenv(dotenv_path="../.env")
@@ -15,7 +16,8 @@ CORS(app)
 app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY", "fallback-secret")
 jwt = JWTManager(app)
 
-app.register_blueprint(auth_bp, url_prefix='/api')
+app.register_blueprint(auth_bp, url_prefix='/api/auth')
+app.register_blueprint(api_bp, url_prefix='/api/netflix')
 
 init_db()
 ensure_admin_user()

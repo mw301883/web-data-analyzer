@@ -4,13 +4,11 @@ services:
   data-analyzer-frontend:
     image: data-analyzer-frontend
     ports:
-      - "3000:80"
+      - "3000:3000"
     depends_on:
       - data-analyzer-backend
     networks:
       - data-analyzer-network
-    env_file:
-      - .env
 
   data-analyzer-backend:
     image: data-analyzer-backend
